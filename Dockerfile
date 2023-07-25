@@ -2,15 +2,17 @@ FROM alpine:3.18
 
 RUN apk add --update --no-cache \
     python3 \
-    py3-crcmod \
-    py3-openssl \
     openjdk16-jre
 
 COPY --from=google/cloud-sdk:alpine /google-cloud-sdk/ /google-cloud-sdk/
 
-RUN /google-cloud-sdk/bin/gcloud components install pubsub-emulator beta \
-    && /google-cloud-sdk/bin/gcloud components update \
-    && mkdir -p /var/pubsub
+RUN /google-cloud-sdk/bin/gcloud components remove anthoscli --quiet
+
+RUN /google-cloud-sdk/bin/gcloud components install pubsub-emulator beta --quiet
+
+RUN rm -rf /google-cloud-sdk/.install/.backup
+
+RUN mkdir -p /var/pubsub
 
 EXPOSE 8085
 
