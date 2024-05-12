@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.19
 
 RUN apk add --update --no-cache \
     python3 \
@@ -6,11 +6,9 @@ RUN apk add --update --no-cache \
 
 COPY --from=google/cloud-sdk:alpine /google-cloud-sdk/ /google-cloud-sdk/
 
-RUN /google-cloud-sdk/bin/gcloud components remove anthoscli bq gcloud-crc32c gsutil --quiet \
-    && rm -rf /google-cloud-sdk/.install/.backup
+RUN /google-cloud-sdk/bin/gcloud components remove anthoscli bq gcloud-crc32c gsutil --quiet
 
-RUN /google-cloud-sdk/bin/gcloud components install beta pubsub-emulator --quiet \
-    && rm -rf /google-cloud-sdk/.install/.backup
+RUN /google-cloud-sdk/bin/gcloud components install beta pubsub-emulator --quiet
 
 RUN mkdir -p /var/pubsub
 
