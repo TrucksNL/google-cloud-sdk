@@ -6,7 +6,7 @@ RUN apk add --update --no-cache \
 
 COPY --from=google/cloud-sdk:alpine /google-cloud-sdk/ /google-cloud-sdk/
 
-RUN /google-cloud-sdk/bin/gcloud components remove anthoscli bq gcloud-crc32c gsutil --quiet
+RUN /google-cloud-sdk/bin/gcloud components remove bq gcloud-crc32c gsutil --quiet
 
 RUN /google-cloud-sdk/bin/gcloud components install beta pubsub-emulator --quiet
 
