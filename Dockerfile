@@ -2,7 +2,7 @@ FROM alpine:3.19
 
 RUN apk add --update --no-cache \
     python3 \
-    openjdk16-jre
+    openjdk21-jre
 
 COPY --from=google/cloud-sdk:alpine /google-cloud-sdk/ /google-cloud-sdk/
 
